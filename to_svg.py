@@ -9,6 +9,14 @@ SCALE = 1000
 Point = namedtuple('Point', ['x', 'y'])
 Coordinate = namedtuple('Coordinate', ['lon', 'lat'])
 
+"""
+Notes on map projections:
+
+https://en.wikipedia.org/wiki/Transverse_Mercator_projection 
+https://en.wikipedia.org/wiki/Map_projection#Conformal
+
+"""
+
 def point_strings_to_decimals(point):
     return Coordinate(
         lat=Decimal(point[0]),
