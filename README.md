@@ -21,3 +21,6 @@ Cards:
 * https://shuffledink.com/request-a-quote/
 
 ![The original](RiskBoard_728x705_SimpleMonroe.png)
+
+Other references:
+* [Biship card](https://commons.wikimedia.org/wiki/File:Mitre_-_Heraldry.svg)
