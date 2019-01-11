@@ -2,7 +2,7 @@ Making a custom RISK bord for a friend for Christmas.
 
 Steps:
 * [ ] Prepare the board
-  * [x] Get Parish data
+  * [x] Get Parish data from https://oprp.dor.org/map/
   * [ ] Prepare an SVG
   * [ ] Merge parishes down to 42
   * [ ] How to color the areas with B&W?
@@ -23,4 +23,6 @@ Cards:
 ![The original](RiskBoard_728x705_SimpleMonroe.png)
 
 Other references:
+* [Map of NYS Counties](https://commons.wikimedia.org/wiki/File:Map_of_New_York_County_Outlines.svg)
+* Polygon-combining? https://stackoverflow.com/questions/2667748/how-do-i-combine-complex-polygons
 * [Biship card](https://commons.wikimedia.org/wiki/File:Mitre_-_Heraldry.svg)

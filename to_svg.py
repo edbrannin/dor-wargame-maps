@@ -15,6 +15,11 @@ Notes on map projections:
 https://en.wikipedia.org/wiki/Transverse_Mercator_projection 
 https://en.wikipedia.org/wiki/Map_projection#Conformal
 
+On label placement:
+https://en.wikipedia.org/wiki/Centroid#Of_a_polygon
+https://math.stackexchange.com/questions/90463/how-can-i-calculate-the-centroid-of-polygon
+https://math.stackexchange.com/questions/1801867/finding-the-centre-of-an-abritary-set-of-points-in-two-dimensions
+https://math.stackexchange.com/questions/3177/why-doesnt-a-simple-mean-give-the-position-of-a-centroid-in-a-polygon
 """
 
 def point_strings_to_decimals(point):
