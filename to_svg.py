@@ -3,6 +3,8 @@ import re
 from decimal import Decimal
 from collections import namedtuple
 
+import pysvgwrite
+
 TITLE_REGEX = re.compile(r'(.*) \((.* Deanery)\)')
 SCALE = 1000
 
@@ -87,6 +89,20 @@ class Map(object):
             for point in p.points(projection):
                 yield point
 
+    
+    def drawing(self):
+        svg = svgwrite.Drawing()
+        projection = self.projection(1000)
+        for p in self.parishes:
+            group = svg.g(id=parish.title)
+            path = svg.path('M')
+            points = p.points(projection)
+            for point in points:
+                path.push(point)
+            group.add(path)
+            svg.add(group)
+        return svg
+
 class Parish(object):
     """
     [
@@ -147,6 +163,7 @@ def main():
     print()
     corners = find_corners(list(m.all_points()))
     print('Corners: {}'.format(corners))
+    print()
 
 if __name__ == '__main__':
     main()
