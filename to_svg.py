@@ -3,13 +3,16 @@ import re
 from decimal import Decimal
 from collections import namedtuple
 
-import pysvgwrite
+import svgwrite
 
 TITLE_REGEX = re.compile(r'(.*) \((.* Deanery)\)')
 SCALE = 1000
 
 Point = namedtuple('Point', ['x', 'y'])
 Coordinate = namedtuple('Coordinate', ['lon', 'lat'])
+
+def slug(text):
+    return re.sub(r'[^a-zA-Z]+', '-', text)
 
 """
 Notes on map projections:
@@ -94,12 +97,15 @@ class Map(object):
         svg = svgwrite.Drawing()
         projection = self.projection(1000)
         for p in self.parishes:
-            group = svg.g(id=parish.title)
-            path = svg.path('M')
+            print('Drawing {}'.format(p.title))
+            group = svg.g(id=slug(p.title))
+            path = svg.path('M', fill="#{}".format(p.data["fillcolor"]))
             points = p.points(projection)
             for point in points:
                 path.push(point)
             group.add(path)
+            label = svg.text(p.title, p.center(projection))
+            group.add(label)
             svg.add(group)
         return svg
 
@@ -125,24 +131,33 @@ class Parish(object):
 
     def __init__(self, data):
         self.data = data
-        self.title = data['title']
+        self.title = data['title'].replace('\&#039;', "'")
         m = TITLE_REGEX.match(self.title)
         if m:
             self.name = m.group(1)
             self.deanery = m.group(2)
-        print('{} - {}'.format(self.name, self.deanery))
+        print('Parish {} is in Deanery {}'.format(self.name, self.deanery))
         self.coords = [point_strings_to_decimals(point) for point in self.data['polydata']]
         print(self.coords[0])
-        print()
+        print('')
         # print(self.data.keys())
         self.max_lat = max([coord.lat for coord in self.coords])
         self.max_lon = max([coord.lon for coord in self.coords])
         self.min_lat = min([coord.lat for coord in self.coords])
         self.min_lon = min([coord.lon for coord in self.coords])
     
+    def center(self, projection=None):
+        "Return the center of this parish's bounding box"
+        if projection is None:
+            projection = lambda x: x
+        return projection(Coordinate(
+            self.min_lat + (self.max_lat - self.min_lat) / 2,
+            self.min_lon + (self.max_lon - self.min_lon) / 2,
+            ))
+    
     def points(self, projection=None):
         if projection is None:
-            projection = lambda lat, lon: (lat, lon)
+            projection = lambda x: x
         return [projection(coord) for coord in self.coords]
 
 def load_parishes():
@@ -160,10 +175,21 @@ def main():
     m = load_parishes()
     print('Min (lat, lon) = ({}, {})'.format(m.min_lat, m.min_lon))
     print('Max (lat, lon) = ({}, {})'.format(m.max_lat, m.max_lon))
-    print()
+    print('')
     corners = find_corners(list(m.all_points()))
     print('Corners: {}'.format(corners))
-    print()
+    print('')
+    with open('map.svg', 'w') as outfile:
+        svg_text = m.drawing().tostring()
+        outfile.write(svg_text)
+        print('Wrote {} bytes to {}'.format(len(svg_text), 'map.svg'))
+    print(m.drawing().tostring())
 
 if __name__ == '__main__':
     main()
+
+# TODO
+# Combine Monroe deaneries:
+# Monroe Central Deanery
+# Monroe East Deanery
+# Monroe West Deanery
