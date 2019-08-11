@@ -83,7 +83,7 @@ class Map(object):
 
         return lambda coord: Point(
             ((coord.lon - min_lon) * scale / delta_lon * lat_over_lon_ratio).quantize(q_scale),
-            ((coord.lat - min_lat) * scale / delta_lat).quantize(q_scale),
+            ((coord.lat - min_lat) * -scale / delta_lat).quantize(q_scale),
         )
     
     def all_points(self):
@@ -99,12 +99,12 @@ class Map(object):
         for p in self.parishes:
             print('Drawing {}'.format(p.title))
             group = svg.g(id=slug(p.title))
-            path = svg.path('M', fill="#{}".format(p.data["fillcolor"]))
+            path = svg.path('M', color="black", fill="#{}".format(p.data["fillcolor"]))
             points = p.points(projection)
             for point in points:
                 path.push(point)
             group.add(path)
-            label = svg.text(p.title, p.center(projection))
+            label = svg.text(p.title, p.center(projection), fill="black")
             group.add(label)
             svg.add(group)
         return svg
@@ -179,11 +179,11 @@ def main():
     corners = find_corners(list(m.all_points()))
     print('Corners: {}'.format(corners))
     print('')
-    with open('map.svg', 'w') as outfile:
+    filename = 'map.svg'
+    with open(filename, 'w') as outfile:
         svg_text = m.drawing().tostring()
         outfile.write(svg_text)
-        print('Wrote {} bytes to {}'.format(len(svg_text), 'map.svg'))
-    print(m.drawing().tostring())
+        print('Wrote {} bytes to {}'.format(len(svg_text), filename))
 
 if __name__ == '__main__':
     main()
