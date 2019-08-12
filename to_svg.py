@@ -50,10 +50,15 @@ def find_corners(points):
 class Map(object):
     def __init__(self):
         self.parishes = []
+        self.deaneries = defaultdict(list)
     
     def add(self, parish):
         self.parishes.append(parish)
+        self.deaneries[parish.deanery].append(parish)
     
+    def combine_deanery(self, deanery):
+        pass
+
     @property
     def max_lat(self):
         return max([p.max_lat for p in self.parishes])
@@ -92,14 +97,11 @@ class Map(object):
             for point in p.points(projection):
                 yield point
 
-    
     def drawing(self):
         svg = svgwrite.Drawing()
         projection = self.projection(1000)
         deaneries = defaultdict(list)
-        for p in self.parishes:
-            deaneries[p.deanery].append(p)
-        for deanery, parishes in deaneries.items():
+        for deanery, parishes in self.deaneries.items():
             group = svg.g(id=slug(deanery))
             for p in parishes:
                 print('Drawing {}'.format(p.title))
@@ -112,9 +114,12 @@ class Map(object):
             svg.add(group)
         labels = svg.g(id='labels')
         print('Adding labels')
-        for p in self.parishes:
-            label = svg.text(p.title, p.center(projection), id=slug(p.title), fill="black")
-            labels.add(label)
+        for deanery, parishes in self.deaneries.items():
+            group = svg.g(id='Label-{}'.format(slug(deanery)))
+            for p in parishes:
+                label = svg.text(p.title, p.center(projection), id=slug(p.title), fill="black")
+                group.add(label)
+            labels.add(group)
         svg.add(labels)
         return svg
 
