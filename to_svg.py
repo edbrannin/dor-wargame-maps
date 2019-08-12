@@ -99,7 +99,7 @@ class Map(object):
         for p in self.parishes:
             print('Drawing {}'.format(p.title))
             group = svg.g(id=slug(p.title))
-            path = svg.path('M', color="black", fill="#{}".format(p.data["fillcolor"]))
+            path = svg.path('M', stroke="black", stroke_width="1", fill="#{}".format(p.data["fillcolor"]))
             points = p.points(projection)
             for point in points:
                 path.push(point)
@@ -138,21 +138,22 @@ class Parish(object):
             self.deanery = m.group(2)
         print('Parish {} is in Deanery {}'.format(self.name, self.deanery))
         self.coords = [point_strings_to_decimals(point) for point in self.data['polydata']]
-        print(self.coords[0])
-        print('')
         # print(self.data.keys())
         self.max_lat = max([coord.lat for coord in self.coords])
         self.max_lon = max([coord.lon for coord in self.coords])
         self.min_lat = min([coord.lat for coord in self.coords])
         self.min_lon = min([coord.lon for coord in self.coords])
+        print('Bounding box: ({}, {}) - ({}, {})'.format(self.max_lat, self.max_lon, self.min_lat, self.min_lon))
+        print('Center: {}'.format(self.center()))
+        print('')
     
     def center(self, projection=None):
         "Return the center of this parish's bounding box"
         if projection is None:
             projection = lambda x: x
         return projection(Coordinate(
-            self.min_lat + (self.max_lat - self.min_lat) / 2,
-            self.min_lon + (self.max_lon - self.min_lon) / 2,
+            self.min_lon + ((self.max_lon - self.min_lon) / 2),
+            self.min_lat + ((self.max_lat - self.min_lat) / 2),
             ))
     
     def points(self, projection=None):
