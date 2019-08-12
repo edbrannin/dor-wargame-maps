@@ -57,7 +57,16 @@ class Map(object):
         self.deaneries[parish.deanery].append(parish)
     
     def combine_deanery(self, deanery):
-        pass
+        parishes = self.deaneries[deanery]
+        all_points = set()
+        duplicate_points = set()
+        for p in parishes:
+            for point in p.points(self.projection()):
+                if point in all_points:
+                    duplicate_points.add(point)
+                all_points.add(point)
+        print('Checked {} points, found {} duplicates'.format(len(all_points), len(duplicate_points)))
+        # Figure out correct outline
 
     @property
     def max_lat(self):
@@ -198,6 +207,7 @@ def main():
     print('Deaneries found:')
     for deanery_name in m.deaneries.keys():
         print('- {}'.format(deanery_name))
+    m.combine_deanery('Monroe Central Deanery')
     filename = 'map.svg'
     with open(filename, 'w') as outfile:
         svg_text = m.drawing().tostring()
