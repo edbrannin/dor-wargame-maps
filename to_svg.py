@@ -104,9 +104,12 @@ class Map(object):
             for point in points:
                 path.push(point)
             group.add(path)
-            label = svg.text(p.title, p.center(projection), fill="black")
-            group.add(label)
             svg.add(group)
+        labels = svg.g(id='labels')
+        for p in self.parishes:
+            label = svg.text(p.title, p.center(projection), id=slug(p.title), fill="black")
+            labels.add(label)
+        svg.add(labels)
         return svg
 
 class Parish(object):
