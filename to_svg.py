@@ -105,7 +105,7 @@ class Map(object):
             group = svg.g(id=slug(deanery))
             for p in parishes:
                 print('Drawing {}'.format(p.title))
-                path = svg.path('M', id=slug(p.title),
+                path = svg.path('M', id=slug(p.name),
                                 stroke="black", stroke_width="1", fill="#{}".format(p.data["fillcolor"]))
                 points = p.points(projection)
                 for point in points:
@@ -117,7 +117,7 @@ class Map(object):
         for deanery, parishes in self.deaneries.items():
             group = svg.g(id='Label-{}'.format(slug(deanery)))
             for p in parishes:
-                label = svg.text(p.title, p.center(projection), id=slug(p.title), fill="black")
+                label = svg.text(p.name, p.center(projection), id=slug(p.name), fill="black")
                 group.add(label)
             labels.add(group)
         svg.add(labels)
@@ -195,6 +195,9 @@ def main():
     corners = find_corners(list(m.all_points()))
     print('Corners: {}'.format(corners))
     print('')
+    print('Deaneries found:')
+    for deanery_name in m.deaneries.keys():
+        print('- {}'.format(deanery_name))
     filename = 'map.svg'
     with open(filename, 'w') as outfile:
         svg_text = m.drawing().tostring()
