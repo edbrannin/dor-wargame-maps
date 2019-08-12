@@ -1,7 +1,7 @@
 import json
 import re
 from decimal import Decimal
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 
 import svgwrite
 
@@ -96,16 +96,22 @@ class Map(object):
     def drawing(self):
         svg = svgwrite.Drawing()
         projection = self.projection(1000)
+        deaneries = defaultdict(list)
         for p in self.parishes:
-            print('Drawing {}'.format(p.title))
-            group = svg.g(id=slug(p.title))
-            path = svg.path('M', stroke="black", stroke_width="1", fill="#{}".format(p.data["fillcolor"]))
-            points = p.points(projection)
-            for point in points:
-                path.push(point)
-            group.add(path)
+            deaneries[p.deanery].append(p)
+        for deanery, parishes in deaneries.items():
+            group = svg.g(id=slug(deanery))
+            for p in parishes:
+                print('Drawing {}'.format(p.title))
+                path = svg.path('M', id=slug(p.title),
+                                stroke="black", stroke_width="1", fill="#{}".format(p.data["fillcolor"]))
+                points = p.points(projection)
+                for point in points:
+                    path.push(point)
+                group.add(path)
             svg.add(group)
         labels = svg.g(id='labels')
+        print('Adding labels')
         for p in self.parishes:
             label = svg.text(p.title, p.center(projection), id=slug(p.title), fill="black")
             labels.add(label)
@@ -135,6 +141,7 @@ class Parish(object):
     def __init__(self, data):
         self.data = data
         self.title = data['title'].replace('\&#039;', "'")
+        self.name, self.deanery = re.match(r'(.*) \((.* Deanery)\)', self.title).groups()
         m = TITLE_REGEX.match(self.title)
         if m:
             self.name = m.group(1)
