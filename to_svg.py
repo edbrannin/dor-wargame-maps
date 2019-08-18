@@ -6,9 +6,11 @@ from collections import namedtuple, defaultdict
 import svgwrite
 
 TITLE_REGEX = re.compile(r'(.*) \((.* Deanery)\)')
-SCALE = 1000
+SCALE = 8000
 
 Point = namedtuple('Point', ['x', 'y'])
+Point.round = lambda point: Point(round(point.x), round(point.y))
+
 Coordinate = namedtuple('Coordinate', ['lon', 'lat'])
 
 def slug(text):
@@ -84,7 +86,7 @@ class Map(object):
     def min_lon(self):
         return min([p.min_lon for p in self.parishes])
     
-    def projection(self, scale=1000):
+    def projection(self, scale=SCALE):
         min_lat, min_lon = self.min_lat, self.min_lon
         delta_lat = self.max_lat - self.min_lat
         delta_lon = self.max_lon - self.min_lon
@@ -98,17 +100,17 @@ class Map(object):
         return lambda coord: Point(
             ((coord.lon - min_lon) * scale / delta_lon * lat_over_lon_ratio).quantize(q_scale),
             ((coord.lat - min_lat) * -scale / delta_lat).quantize(q_scale),
-        )
+        ).round()
     
     def all_points(self):
-        projection = self.projection(1000)
+        projection = self.projection()
         for p in self.parishes:
             for point in p.points(projection):
                 yield point
 
     def drawing(self):
         svg = svgwrite.Drawing()
-        projection = self.projection(1000)
+        projection = self.projection()
         deaneries = defaultdict(list)
         for deanery, parishes in self.deaneries.items():
             group = svg.g(id=slug(deanery))
@@ -126,7 +128,9 @@ class Map(object):
         for deanery, parishes in self.deaneries.items():
             group = svg.g(id='Label-{}'.format(slug(deanery)))
             for p in parishes:
-                label = svg.text(p.name, p.center(projection), id=slug(p.name), fill="black")
+                label = svg.text(p.name, p.center(projection),
+                                 id=slug(p.name), fill="black",
+                                 text_anchor="middle")
                 group.add(label)
             labels.add(group)
         svg.add(labels)
@@ -207,7 +211,7 @@ def main():
     print('Deaneries found:')
     for deanery_name in m.deaneries.keys():
         print('- {}'.format(deanery_name))
-    m.combine_deanery('Monroe Central Deanery')
+    # m.combine_deanery('Monroe Central Deanery')
     filename = 'map.svg'
     with open(filename, 'w') as outfile:
         svg_text = m.drawing().tostring()
