@@ -131,7 +131,7 @@ class Map(object):
             for p in parishes:
                 label = svg.text(p.name, p.center(projection),
                                  id=slug(p.name), fill="black",
-                                 text_anchor="middle")
+                                 font_size=24, text_anchor="middle")
                 group.add(label)
             labels.add(group)
         svg.add(labels)
