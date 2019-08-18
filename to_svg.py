@@ -101,7 +101,7 @@ class Map(object):
         return lambda coord: Point(
             ((coord.lon - min_lon) * scale / delta_lon * lat_over_lon_ratio).quantize(q_scale),
             ((coord.lat - min_lat) * -scale / delta_lat).quantize(q_scale),
-        ).round()
+        ).round() #pylint: disable=no-member
     
     def all_points(self):
         projection = self.projection()
@@ -135,6 +135,10 @@ class Map(object):
                 group.add(label)
             labels.add(group)
         svg.add(labels)
+        bounding_box = svg.rect(id="Bounding-Box",
+                                insert=(0, -SCALE), size=(SCALE, SCALE),
+                                stroke_width="5", stroke="black", fill="none")
+        svg.add(bounding_box)
         return svg
 
 class Parish(object):
