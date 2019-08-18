@@ -30,6 +30,14 @@ https://math.stackexchange.com/questions/1801867/finding-the-centre-of-an-abrita
 https://math.stackexchange.com/questions/3177/why-doesnt-a-simple-mean-give-the-position-of-a-centroid-in-a-polygon
 """
 
+DEANERY_BONUSES = [
+    ("Monroe", 2),
+    ("South", 3),
+    ("West", 5),
+    ("East", 5),
+    ("Central", 7),
+]
+
 def point_strings_to_decimals(point):
     return Coordinate(
         lat=Decimal(point[0]),
@@ -139,7 +147,11 @@ class Map(object):
                                 insert=(0, -SCALE), size=(SCALE, SCALE),
                                 stroke_width="5", stroke="black", fill="none")
         svg.add(bounding_box)
+        self.add_bonuses(svg)
         return svg
+
+    def add_bonuses(self, drawing):
+        text_area = drawing.textArea()
 
 class Parish(object):
     """
