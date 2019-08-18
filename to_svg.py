@@ -4,6 +4,7 @@ import re
 from decimal import Decimal
 from collections import namedtuple, defaultdict
 
+import pyproj # Import the pyproj module
 import svgwrite
 
 TITLE_REGEX = re.compile(r'(.*) \((.* Deanery)\)')
@@ -107,14 +108,32 @@ class Map(object):
         center_lat = (self.max_lat + self.min_lat) / 2
         center_lon = (self.max_lon + self.min_lon) / 2
 
-        # +proj=tmerc +lon_0={center_lon} +lat_0={center_lat}
+ 
+        # Define a projection with Proj4 notation, in this case an Icelandic grid
+        proj_settings = "+proj=tmerc +lon_0={center_lon} +lat_0={center_lat}".format(
+            center_lon=center_lon, center_lat=center_lat)
+        func = pyproj.Proj(proj_settings)
+
+        proj_max_x, proj_max_y = func(self.max_lat, self.max_lon)
+        proj_min_x, proj_min_y = func(min_lat, min_lon)
+        proj_delta_x = proj_max_x - proj_min_x
+        proj_delta_y = proj_max_y - proj_min_y
+
+        def answer(coord):
+            x, y = func(coord.lon, coord.lat)
+            return Point(
+                (x - proj_min_x) * (scale / proj_delta_x),
+                (y - proj_min_y) * (scale / proj_delta_y),
+            )
+
+        return answer
 
         q_scale = Decimal('0.001')
 
-        return lambda coord: Point(
+        return lambda coord: Point( #pylint: disable=no-member
             ((coord.lon - min_lon) * scale / delta_lon * lat_over_lon_ratio).quantize(q_scale),
             ((coord.lat - min_lat) * -scale / delta_lat).quantize(q_scale),
-        ).round() #pylint: disable=no-member
+        ).round()
     
     def all_points(self):
         projection = self.projection()
@@ -151,7 +170,7 @@ class Map(object):
         bounding_box = svg.rect(id="Bounding-Box",
                                 insert=(0, -SCALE), size=(SCALE, SCALE),
                                 stroke_width="5", stroke="black", fill="none")
-        svg.add(bounding_box)
+        # svg.add(bounding_box)
         self.add_bonuses(svg)
         return svg
 
