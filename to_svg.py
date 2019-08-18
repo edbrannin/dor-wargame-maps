@@ -103,6 +103,11 @@ class Map(object):
 
         print('Map area spans: lon {}, lat {}, lat/lon {}'.format(
             delta_lon, delta_lat, lat_over_lon_ratio))
+        
+        center_lat = (self.max_lat + self.min_lat) / 2
+        center_lon = (self.max_lon + self.min_lon) / 2
+
+        # +proj=tmerc +lon_0={center_lon} +lat_0={center_lat}
 
         q_scale = Decimal('0.001')
 
