@@ -59,6 +59,24 @@ def find_corners(points):
             max_y = p.y
     return (Point(min_x, min_y), Point(max_x, max_y))
 
+def draw_parish(svg, p, projection):
+    print('Drawing {}'.format(p.title))
+    path = svg.path('M', id=slug(p.name),
+                    stroke="black", stroke_width="1", fill="#{}".format(p.data["fillcolor"]))
+    points = p.points(projection)
+    for point in points:
+        path.push(point)
+    return path
+
+def draw_parish_box(svg, p, projection):
+    print('Drawing Box: {}'.format(p.title))
+    bounding_box = svg.rect(id=slug(p.name),
+                            insert=p.corner(projection), size=p.size(projection),
+                            stroke_width="5", stroke="black",
+                            # fill="#{}".format(p.data["fillcolor"])
+                            )
+    return bounding_box
+
 class Map(object):
     def __init__(self):
         self.parishes = []
@@ -148,13 +166,8 @@ class Map(object):
         for deanery, parishes in self.deaneries.items():
             group = svg.g(id=slug(deanery))
             for p in parishes:
-                print('Drawing {}'.format(p.title))
-                path = svg.path('M', id=slug(p.name),
-                                stroke="black", stroke_width="1", fill="#{}".format(p.data["fillcolor"]))
-                points = p.points(projection)
-                for point in points:
-                    path.push(point)
-                group.add(path)
+                group.add(draw_parish(svg, p, projection))
+                # group.add(draw_parish_box(svg, p, projection))
             svg.add(group)
         labels = svg.g(id='labels')
         print('Adding labels')
