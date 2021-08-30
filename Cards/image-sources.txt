@@ -1,0 +1,89 @@
+20903b_3eb5622374864014ab0fd5ed8dedb36f_mv2.webp
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://static.wixstatic.com/media/20903b_3eb5622374864014ab0fd5ed8dedb36f~mv2.jpg/v1/fill/w_254,h_192,al_c,q_80,usm_0.66_1.00_0.01/20903b_3eb5622374864014ab0fd5ed8dedb36f~mv2.webp</string>
+	<string>https://www.romanitaspress.com/</string>
+</array>
+</plist>
+
+CoA_Roman_Catholic_Diocese_of_Rochester.svg
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://upload.wikimedia.org/wikipedia/commons/9/95/CoA_Roman_Catholic_Diocese_of_Rochester.svg?download</string>
+	<string>https://en.wikipedia.org/</string>
+</array>
+</plist>
+
+deacon 1.jpeg
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>http://clipart-library.com/image_gallery/165577.jpg</string>
+	<string>http://clipart-library.com/clipart/165577.htm</string>
+</array>
+</plist>
+
+EmptyCard.svg
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://upload.wikimedia.org/wikipedia/commons/c/ce/EmptyCard.svg?download</string>
+	<string>https://commons.wikimedia.org/</string>
+</array>
+</plist>
+
+iconfinder_450133_catholic_christian_church_bishop_cardinal_icon_512px.png
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://www.iconfinder.com/icons/450133/download/png/512</string>
+	<string>https://www.iconfinder.com/icons/450133/catholic_christian_church_bishop_cardinal_pope_icon</string>
+</array>
+</plist>
+
+N0341-front.jpeg
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://www.liturgix.org/image/data/n/N0341-front.jpg</string>
+	<string>https://www.liturgix.org/n0341</string>
+</array>
+</plist>
+
+Orthodox_cross.svg
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://upload.wikimedia.org/wikipedia/commons/e/e7/Orthodox_cross.svg</string>
+</array>
+</plist>
+
+Priests-Stole--Religion-Priest-Christianity-Clothing-Vestments-Aus-KS1-black-and-white-RGB.png
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://images.twinkl.co.uk/tr/image/upload/t_illustration/illustation/Priests-Stole--Religion-Priest-Christianity-Clothing-Vestments-Aus-KS1-black-and-white-RGB.png</string>
+	<string>https://www.twinkl.ae/illustration/priests-stole-religion-priest-christianity-clothing-vestments-aus-ks1-black-and-white-rgb</string>
+</array>
+</plist>
+
+risk-cards.jpeg
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>https://www.scuzzstuff.org/risk/help/cards.jpg</string>
+	<string>https://www.scuzzstuff.org/risk/help/game_domination.htm</string>
+</array>
+</plist>
+
