@@ -1461,11 +1461,11 @@ RvJb2qhH/9k=
      fill="#ffffff"
      stroke="#000000"
      id="rect2255"
-     style="display:inline;stroke-width:0.999999"
+     style="display:inline;stroke-width:0.999999;fill:none"
      inkscape:label="Card Template" />
   <g
      id="g39561"
-     inkscape:label="Card Back"
+     inkscape:label="[Extract] Card Back"
      transform="matrix(3.7795276,0,0,3.7795276,310.22036,9.5998656)"
      style="display:none">
     <rect
@@ -2014,7 +2014,7 @@ RvJb2qhH/9k=
   <g
      id="g621"
      transform="translate(602.79572,-1014.0819)"
-     inkscape:label="Wild"
+     inkscape:label="[Extract] Wild"
      style="display:none"
      sodipodi:insensitive="true">
     <rect
