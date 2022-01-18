@@ -26,3 +26,4 @@ Other references:
 * [Map of NYS Counties](https://commons.wikimedia.org/wiki/File:Map_of_New_York_County_Outlines.svg)
 * Polygon-combining? https://stackoverflow.com/questions/2667748/how-do-i-combine-complex-polygons
 * [Biship card](https://commons.wikimedia.org/wiki/File:Mitre_-_Heraldry.svg)
+* [Card Backgrond](https://www.deviantart.com/icycatelf/art/Certificate-Paper-Texture-265297800)
