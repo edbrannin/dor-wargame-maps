@@ -47,6 +47,7 @@ $BASE_DIR/deck-layers_St.\\ Mary\\ of\\ the\\ Lake.pdf
 $BASE_DIR/deck-layers_St.\\ Mary\\ Our\\ Mother\\ Horseheads.pdf
 $BASE_DIR/deck-layers_St\\ Patrick\\ Tioga\\ County.pdf
 $BASE_DIR/deck-layers_St\\ Mary\\ Elmira.pdf
+$BASE_DIR/deck-layers_Our\\ Lady\\ of\\ Snows.pdf
 $BASE_DIR/deck-layers_Holy\\ Cross\\ Freeville.pdf
 $BASE_DIR/deck-layers_Immaculate\\ Conception\\ Ithaca.pdf
 $BASE_DIR/deck-layers_Auburn.pdf
@@ -56,7 +57,6 @@ $BASE_DIR/deck-layers_St\\ Anthony\\ Groton.pdf
 $BASE_DIR/deck-layers_Sacred\\ Heart\\ St\\ Anne.pdf
 $BASE_DIR/deck-layers_Mary\\ Mother\\ of\\ Mercy.pdf
 $BASE_DIR/deck-layers_St\\ Catherine\\ of\\ Siena.pdf
-$BASE_DIR/deck-layers_Our\\ Lady\\ of\\ Snows.pdf
 $BASE_DIR/deck-layers_Blank.pdf
 $BASE_DIR/deck-layers_Blank.pdf
 $BASE_DIR/deck-layers_Blank.pdf
